@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import HeaderPrimary from "@/components/header/header-primary/page";
+import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
+import ModeToggle from "@/components/ui/ModeToggle";
+import theme from "@/theme";
+import { Box } from "@mui/material";
+import HeaderSecondary from "@/components/header/header-secondary/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <CssVarsProvider theme={theme}>
+          <Box sx={{ backgroundColor: "primary.main" }}>
+            <HeaderPrimary />
+            <HeaderSecondary />
+            {children}
+          </Box>
+        </CssVarsProvider>
+      </body>
     </html>
   );
 }
